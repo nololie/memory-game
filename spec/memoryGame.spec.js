@@ -1,7 +1,7 @@
-let myGreeting = require("../memoryGame")
+let mycreateGameSpace = require("../memoryGame")
 
 describe("test", function() {
-    it("greets me", function(){
-        expect(myGreeting.greet()).toBe("HEY")
+    it("createGameSpaces me", function(){
+        expect(mycreateGameSpace.createGameSpace()).toBe(mycreateGameSpace)
     })
 })
