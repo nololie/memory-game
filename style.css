@@ -1,4 +1,6 @@
 img{
+    align-items: center;
+    justify-items: center;
     height: 15rem;
     width: 15rem;
 }
