@@ -19,32 +19,33 @@ function createGameSpace(){
   for (var i = 0; i < 3; i++) { 
     for (var j = 0; j < 4; j++){ 
       gfg[i][j] = '<img src="Media/13.png"></img>'
-      document.write(gfg[i][j])
     }
-    document.write("<br>")
   }
-}
-
   return gfg;
 }
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // plotting in gamepace
-function plotGameComponets(){
+function plotGameComponets(arr){
+  var pictureNo = 0
   for (var i = 0; i < 3; i++) {
-    for (var j = 0; j < 4; j++) {
-      gfg[i][j] = '<img src="Media/13.png"></img>'
-      document.write(gfg[i][j])
+    for (var j = 0; j < 4; j++){
+      pictureNo = getRandomInt(0, 13)
+      let picAddress = "Media/" + toString(pictureNo) + ".png"
+      arr[i][j] = '<img src="picAddress"></img>'
     }
-    document.write("<br>")
   }
 }
 
-// displaying gameSpace
-function displayInGameSpace(arr){
+// displaying plotted gameSpace
+function displayInGameSpace(arr, loopRows,loopcols){
   // Loop to display the elements of 2D array. 
   for (var i = 0; i < 3; i++) { 
-    for (var j = 0; j < 4; j++) { 
-      if (arr[i][j] !== '<img src="Media/13.png"></img>'){
+    for (var j = 0; j < 4; j++) {
+      if (arr[i][j] == '<img src="Media/13.png"></img>'){
         document.write(arr[i][j])
       }
     }
@@ -53,5 +54,6 @@ function displayInGameSpace(arr){
 }
 
 // my function calls
-createGameSpace();
-// displayInGameSpace()
+createGameSpace()
+plotGameComponets(gfg)
+displayInGameSpace(gfg)
