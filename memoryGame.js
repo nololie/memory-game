@@ -3,7 +3,7 @@ var images = new Array(13)
 
 // storing game Objects in an Array
 function storeGameObjects(){
-  
+
   images[0] = '<img id="coverimage" src="Media/13.png"></img>'
   for(var i = 1; i < 13; i++){
     images[i] = '<img id="imge' + i + '" src="Media/'+ i +'.png"></img>'
