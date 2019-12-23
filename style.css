@@ -1,11 +1,33 @@
 img{
-    align-items: center;
-    justify-items: center;
-    height: 15rem;
-    width: 15rem;
+    align-self: center;
+    justify-self: center;      /*this code just dont work*/
+    margin: 1rem;
+    height: 10rem;
+    width: 10rem;
 }
 
-/* #myGameSpaceWorld {
+#TheeGameSpace{
+    align-self: center;
+    justify-self: center;    /*this code just dont work*/
+
+    width: fit-content;
+
+    background-color: black;
+}
+
+div{
     align-content: center;
-    justify-content: center;
-} */
+    justify-self: center;       /*this code just dont work*/
+}
+
+body{
+    align-items: center;
+    justify-items: center;       /*this code just dont work*/
+
+    background: yellowgreen;
+}
+
+#Start{
+    align-self: center;
+    margin-top: 2rem;
+}
