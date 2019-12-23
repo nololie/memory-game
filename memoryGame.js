@@ -4,25 +4,18 @@ var images = new Array(12)
 
 // storing game Objects in an Array
 function storeGameObjects(array){
-  console.log('before shuffle==================================')
   for(var i = 1; i <= 12; i++){
     var gameElements = document.createElement('img')
     gameElements.setAttribute('id', "imge" + i)
     gameElements.setAttribute('src', "Media/" + i + ".png")
     array[i] = gameElements
-    console.log(array[i])
   }
 }
-
 
 // shuffling gamepace
 function shaffle(array){
   storeGameObjects(array)
-  console.log('after shuffle====================================')
   array.sort(function(a, b){return 0.5 - Math.random()})
-  for (var i = 1; i <= 12; i++) {
-  console.log(array[i])
-  }
 }
 
 // Create a 2-dimensional array 
@@ -59,6 +52,7 @@ function restart(){
   element.innerHTML = createGameSpace(myGameSpace);
 }
 
+// flipping the images
 function flipImage(row, col){
       if(row == 1){
         element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
@@ -69,43 +63,15 @@ function flipImage(row, col){
       }
 }
 
-var element = document.createElement('div');
-element.setAttribute('id', "TheeGameSpace")
-element.innerHTML = createGameSpace(myGameSpace);
-document.body.appendChild(element);
+shaffle(images)
 
+var element = document.createElement('div')
 var play = document.getElementById('startGame')
 
-play.addEventListener('onClick', shaffle(images))
+element.setAttribute('id', "TheeGameSpace")
 
-// function playGame(array){
-//   rearange(myGameSpace)
-//   startTimer()
-  
-//   // wait for a click and update the gameworld
+element.innerHTML = createGameSpace(myGameSpace)
+document.body.appendChild(element);
 
-//   flip1Index = 0
-//   flip2Index = 0
 
-//   var flipCount = 0
-//   if (flipCount <= 2){
-//     flipImage()
-//     flipCount ++
-//     if (flipCount == 2 && !match){
-//       flipCount = 0
-//       // Unflip
-//     }
-//   }
-// }
-
-// // storing background/hidden gamecomponets
-// storeGameObjects()
-
-// // initialising myGameWorld
-// // window.document.body.innerHTML = createGameSpace(myGameSpace) ===========    
-// myGameWorld = createGameSpace(myGameSpace)
-
-// // printing out myGameWorld
-// document.write(myGameWorld)
-
-// // now we start playing
+// play.addEventListener('onClick', restart(images))
