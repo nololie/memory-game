@@ -4,11 +4,18 @@ var images = new Array(12)
 
 // storing game Objects in an Array
 function storeGameObjects(array){
-  for(var i = 1; i <= 12; i++){
-    var gameElements = document.createElement('img')
-    gameElements.setAttribute('id', "imge" + i)
-    gameElements.setAttribute('src', "Media/" + i + ".png")
-    array[i] = gameElements
+
+  var imageName = 0
+
+  for(var i = 1; i <= 6; i++){
+
+    for(var j = 1; j <=2; j++){
+      var gameElements = document.createElement('img')
+      gameElements.setAttribute('id', "img" + i + '-' + j)
+      gameElements.setAttribute('src', "Media/" + (++imageName) + ".png")
+      array[imageName] = gameElements
+    }
+    
   }
 }
 
@@ -23,8 +30,8 @@ var myGameSpace = new Array(3)
 
 // Creating gameSpace
 function createGameSpace(array){
-  
-    world = ''
+  shaffle(images)
+  world = '<h1> Memory Game: The Gossiper</h1>'
   
   // Loop to create and display the initial game space.
   for (var i = 0; i < array.length; i++){ 
@@ -42,36 +49,137 @@ function createGameSpace(array){
 
   world += "</div>"
 
-  world += '<button id="startGame">Restart</button>'
+  world += '<button id="restartGame" onClick="restart()">Restart</button>'
 
   return world;
 
 }
 
 function restart(){
-  element.innerHTML = createGameSpace(myGameSpace);
+  element.innerHTML = createGameSpace(myGameSpace)
 }
 
 // flipping the images
-function flipImage(row, col){
-      if(row == 1){
-        element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
-      }else if(row == 2){
-        element.replaceChild(images[col+4], document.getElementById('coverimage ' + row + '-' + col))
-      }else{
-        element.replaceChild(images[col + 8], document.getElementById('coverimage ' + row + '-' + col))
+var cover1 = ''
+var cover2 = ''
+var img1 = ''
+var img2 = ''
+var img1Col = 0
+var moves = 0
+function flipImage(row, col){//accept row and column where the  click is happening
+  moves++
+
+  if(row == 0){//move made at row1
+    
+    if(img1 == ''){
+      cover1 = document.getElementById('coverimage ' + row + '-' + col)
+      img1Col = col
+      
+      element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
+      img1 = document.getElementsByTagName('img')[col]
+
+    } 
+    else{
+      cover2 = document.getElementById('coverimage ' + row + '-' + col)
+      
+      element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
+      img2 = document.getElementsByTagName('img')[col]
+      
+      // chack for no match
+      if(img2.id.charAt(3) !== img1.id.charAt(3)){
+        console.log('image1 #NUM = ' + img1.id.charAt(3))
+        console.log('image2 #NUM = ' + img2.id.charAt(3))
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col].id)
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col].id)
+
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col])
+        element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col])
       }
+         
+      // Empty imgs
+      img1 = ''
+      img2 = ''
+      cover1 = ''
+      cover2 = ''
+    }
+
+  }
+  else if(row == 1){//move made at row2
+    
+    if(img1 == ''){
+      cover1 = document.getElementById('coverimage ' + row + '-' + col)
+      img1Col = col
+
+      element.replaceChild(images[col + 4], document.getElementById('coverimage ' + row + '-' + col))
+      img1 = document.getElementsByTagName('img')[col + 4]
+
+    } 
+    else{
+      cover2 = document.getElementById('coverimage ' + row + '-' + col)
+      
+      element.replaceChild(images[col + 4], document.getElementById('coverimage ' + row + '-' + col))
+      img2 = document.getElementsByTagName('img')[col + 4]
+
+      // find out if img1 & img2 match
+      if (img2.id.charAt(3) !== img1.id.charAt(3)) {
+        console.log('image1 #NUM = ' + img1.id.charAt(3))
+        console.log('image2 #NUM = ' + img2.id.charAt(3))
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col + 4].id)
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col + 4].id)
+
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 4])
+        element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col + 4])
+      }
+
+      // Empty imgs
+      img1 = ''
+      img2 = ''
+      cover1 = ''
+      cover2 = ''
+    }
+
+  }
+  else{//move made at row0
+
+    if(img1 == '') {
+      cover1 = document.getElementById('coverimage ' + row + '-' + col)
+      img1Col = col
+      
+      element.replaceChild(images[col + 8], document.getElementById('coverimage ' + row + '-' + col))
+      img1 = document.getElementsByTagName('img')[col + 8]
+
+    }
+    else{
+      cover2 = document.getElementById('coverimage ' + row + '-' + col)
+      
+      element.replaceChild(images[col + 8], document.getElementById('coverimage ' + row + '-' + col))
+      img2 = document.getElementsByTagName('img')[col + 8]
+
+
+      // find out if img1 & img2 match
+      if (img2.id.charAt(3) !== img1.id.charAt(3)){
+        console.log('image1 #NUM = ' + img1.id.charAt(3))
+        console.log('image2 #NUM = ' + img2.id.charAt(3))
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col + 8].id)
+        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col + 8].id)
+
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 8])
+        element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col + 8])
+      }
+      
+      // Empty imgs
+      img1 = ''
+      img2 = ''
+      cover1 = ''
+      cover2 = ''
+    }
+  }
+  
 }
 
-shaffle(images)
-
 var element = document.createElement('div')
-var play = document.getElementById('startGame')
 
 element.setAttribute('id', "TheeGameSpace")
 
 element.innerHTML = createGameSpace(myGameSpace)
-document.body.appendChild(element);
-
-
-// play.addEventListener('onClick', restart(images))
+document.body.appendChild(element)

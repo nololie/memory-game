@@ -6,28 +6,38 @@ img{
     width: 10rem;
 }
 
-#TheeGameSpace{
-    align-self: center;
-    justify-self: center;    /*this code just dont work*/
-
-    width: fit-content;
-
-    background-color: black;
+h1{
+    color: white;
+    margin-left: 20%;
+    padding-top: 5px;
+    margin-bottom: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-div{
-    align-content: center;
-    justify-self: center;       /*this code just dont work*/
+#TheeGameSpace{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 0px;
+    width: fit-content;
+    background-color: black;
+
+    /* align-self: center; */
+    /* justify-self: center;    //this code just dont work */
 }
 
 body{
+    margin-top: 0;
+
     align-items: center;
     justify-items: center;       /*this code just dont work*/
 
     background: yellowgreen;
 }
 
-#Start{
-    align-self: center;
-    margin-top: 2rem;
+#restartGame{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
 }
