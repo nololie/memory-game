@@ -31,7 +31,7 @@ var myGameSpace = new Array(3)
 // Creating gameSpace
 function createGameSpace(array){
   shaffle(images)
-  world = '<h1> Memory Game: The Gossiper</h1>'
+  world = '<h1> Memory Game: The Gossiper (Celebrity couples)</h1>'
   
   // Loop to create and display the initial game space.
   for (var i = 0; i < array.length; i++){ 
@@ -56,6 +56,12 @@ function createGameSpace(array){
 }
 
 function restart(){
+  cover1 = ''
+  over2 = ''
+  img1 = ''
+  img2 = ''
+  img1Col = 0
+  moves = 0
   element.innerHTML = createGameSpace(myGameSpace)
 }
 
@@ -64,6 +70,8 @@ var cover1 = ''
 var cover2 = ''
 var img1 = ''
 var img2 = ''
+var index1 = 0
+var index2 = 0
 var img1Col = 0
 var moves = 0
 function flipImage(row, col){//accept row and column where the  click is happening
@@ -76,6 +84,7 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       img1Col = col
       
       element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex1 = ' + index1)
       img1 = document.getElementsByTagName('img')[col]
 
     } 
@@ -83,17 +92,18 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       cover2 = document.getElementById('coverimage ' + row + '-' + col)
       
       element.replaceChild(images[col], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex2 = ' + index2)
       img2 = document.getElementsByTagName('img')[col]
       
       // chack for no match
       if(img2.id.charAt(3) !== img1.id.charAt(3)){
         console.log('image1 #NUM = ' + img1.id.charAt(3))
         console.log('image2 #NUM = ' + img2.id.charAt(3))
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col].id)
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col].id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[img1Col].id + 'REPLACED WITH: ' + cover1.id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[col].id + 'REPLACED WITH: ' + cover2.id)
 
-        element.replaceChild(cover2, document.getElementsByTagName('img')[col])
         element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col])
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col])
       }
          
       // Empty imgs
@@ -111,6 +121,7 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       img1Col = col
 
       element.replaceChild(images[col + 4], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex1 = ' + index1)
       img1 = document.getElementsByTagName('img')[col + 4]
 
     } 
@@ -118,17 +129,18 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       cover2 = document.getElementById('coverimage ' + row + '-' + col)
       
       element.replaceChild(images[col + 4], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex2 = ' + index2)
       img2 = document.getElementsByTagName('img')[col + 4]
 
       // find out if img1 & img2 match
       if (img2.id.charAt(3) !== img1.id.charAt(3)) {
         console.log('image1 #NUM = ' + img1.id.charAt(3))
         console.log('image2 #NUM = ' + img2.id.charAt(3))
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col + 4].id)
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col + 4].id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[img1Col + 4].id + 'REPLACED WITH: ' + cover1.id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[col + 4].id + 'REPLACED WITH: ' + cover2.id)
 
-        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 4])
         element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col + 4])
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 4])
       }
 
       // Empty imgs
@@ -146,6 +158,7 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       img1Col = col
       
       element.replaceChild(images[col + 8], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex1 = ' + index1)
       img1 = document.getElementsByTagName('img')[col + 8]
 
     }
@@ -153,6 +166,7 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       cover2 = document.getElementById('coverimage ' + row + '-' + col)
       
       element.replaceChild(images[col + 8], document.getElementById('coverimage ' + row + '-' + col))
+      console.log('Inddex2 = ' + index2)
       img2 = document.getElementsByTagName('img')[col + 8]
 
 
@@ -160,11 +174,11 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       if (img2.id.charAt(3) !== img1.id.charAt(3)){
         console.log('image1 #NUM = ' + img1.id.charAt(3))
         console.log('image2 #NUM = ' + img2.id.charAt(3))
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[col + 8].id)
-        console.log('IMAGE REPLACED: ' + document.getElementsByTagName('img')[img1Col + 8].id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[img1Col + 8].id + 'REPLACED WITH: ' + cover1.id)
+        console.log('IMAGE: ' + document.getElementsByTagName('img')[col + 8].id + 'REPLACED WITH: ' + cover2.id)
 
-        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 8])
         element.replaceChild(cover1, document.getElementsByTagName('img')[img1Col + 8])
+        element.replaceChild(cover2, document.getElementsByTagName('img')[col + 8])
       }
       
       // Empty imgs
