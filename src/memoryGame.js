@@ -1,7 +1,20 @@
-
+// GLOBAL VARIABLES==============================================================================================
+var cover1 = ''
+var cover2 = ''
+var img1 = ''
+var img2 = ''
+var index1 = 0
+var index2 = 0
+var img1Col = 0
+var moves = 0
+// Create a 2-dimensional array 
+var myGameSpace = new Array(3)
 // creating an array to store htmlelements
 var images = new Array(12)
+// **************************************************************************************************************
 
+
+// FUNCTIONS=====================================================================================================
 // storing game Objects in an Array
 function storeGameObjects(array){
 
@@ -18,16 +31,11 @@ function storeGameObjects(array){
     
   }
 }
-
-// shuffling gamepace
+// shuffling images
 function shaffle(array){
   storeGameObjects(array)
   array.sort(function(a, b){return 0.5 - Math.random()})
 }
-
-// Create a 2-dimensional array 
-var myGameSpace = new Array(3)
-
 // Creating gameSpace
 function createGameSpace(array){
   shaffle(images)
@@ -54,7 +62,7 @@ function createGameSpace(array){
   return world;
 
 }
-
+// Restart button code
 function restart(){
   cover1 = ''
   over2 = ''
@@ -64,16 +72,7 @@ function restart(){
   moves = 0
   element.innerHTML = createGameSpace(myGameSpace)
 }
-
 // flipping the images
-var cover1 = ''
-var cover2 = ''
-var img1 = ''
-var img2 = ''
-var index1 = 0
-var index2 = 0
-var img1Col = 0
-var moves = 0
 function flipImage(row, col){//accept row and column where the  click is happening
   moves++
 
@@ -190,10 +189,12 @@ function flipImage(row, col){//accept row and column where the  click is happeni
   }
   
 }
+// **************************************************************************************************************
 
+
+// EXECUTION=====================================================================================================
 var element = document.createElement('div')
-
 element.setAttribute('id', "TheeGameSpace")
-
 element.innerHTML = createGameSpace(myGameSpace)
 document.body.appendChild(element)
+// **************************************************************************************************************
