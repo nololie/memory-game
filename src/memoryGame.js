@@ -31,7 +31,7 @@ var myGameSpace = new Array(3)
 // Creating gameSpace
 function createGameSpace(array){
   shaffle(images)
-  world = '<h1> Memory Game: The Gossiper (Celebrity couples)</h1>'
+  world = '<h1> Memory Game: The Gossiper (Match celebrity couples)</h1>'
   
   // Loop to create and display the initial game space.
   for (var i = 0; i < array.length; i++){ 
