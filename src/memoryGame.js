@@ -45,7 +45,7 @@ function createGameSpace(){
   for (var i = 0; i < 3; i++){ 
         
     for (var j = 0; j < 4; j++) { 
-      world += '<img id="coverimage ' + i + "-" + j + '" src="Media/13.png" onClick=' + "flipImage(" + i + "," + j + ")" +'></img>' 
+      world += '<img id="coverimage ' + i + '-' + j + '" src="Media/13.png"></img>' 
     }
 
     world += '<br>'
@@ -69,175 +69,184 @@ function restart(){
   element.innerHTML = createGameSpace(myGameSpace)
 }
 // flipping the images
-function flipImage(row, col){//accept row and column where the  click is happening
+function flipImage(e){//accept row and column where the  click is happening
   moves++
-  
-  switch (row, col) {
+  if(e.target !== e.currentTarget){
+    var clickOn = e.target.id;
+    element.replaceChild(images[4], document.getElementById(clickOn))
+    // alert(images[1].id);
+  }
+  e.stopPropagtion
+
+}
+// **************************************************************************************************************
+
+ switch(row, col){
     case 0 && 0:
-      if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + index1)
-        console.log('Replace: ' + document.getElementsByTagName('img')[0].id + ' by: ' + images[0].id)
-        element.replaceChild(images[0], document.getElementsByTagName('img')[0])
-        img1 = images[0]
+      if(img1 == ''){
+        index1 = 0
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
-      } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 0)
-        console.log('Replace: ' + document.getElementsByTagName('img')[0].id + ' by: ' + images[0].id)
-        element.replaceChild(images[0], document.getElementsByTagName('img')[0])
+      }else{
+        index2 = 0
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 0 && 1:
       if (img1 == '') {
-        console.log('Row = ' + (row) + ' column = ' + (col) + ' Flip index = ' + (1))
-        console.log('Replace: ' + document.getElementsByTagName('img')[1].id + ' by: ' + images[1].id)
-        element.replaceChild(images[1], document.getElementsByTagName('img')[1])
-        img1 = images[1]
+        index1 = 1
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 1)
-        console.log('Replace: ' + document.getElementsByTagName('img')[1].id + ' by: ' + images[1].id)
-        element.replaceChild(images[1], document.getElementsByTagName('img')[1])
+        index2 = 1
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 0 && 2:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 2)
-        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[2].id)
-        element.replaceChild(images[2], document.getElementsByTagName('img')[2])
-        img1 = images[2]
+        index1 = 2
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 2)
-        console.log('Replace: ' + document.getElementsByTagName('img')[2].id + ' by: ' + images[2].id)
-        element.replaceChild(images[2], document.getElementsByTagName('img')[2])
+        index2 = 2
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 0 && 3:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 3)
-        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[3].id)
-        element.replaceChild(images[3], document.getElementsByTagName('img')[3])
+        index1 = 3
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
         img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 3)
-        console.log('Replace: ' + document.getElementsByTagName('img')[3].id + ' by: ' + images[3].id)
-        element.replaceChild(images[3], document.getElementsByTagName('img')[3])
+        index2 = 3
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 1 && 0:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 4)
-        console.log('Replace: ' + document.getElementsByTagName('img')[4].id + ' by: ' + images[inde4x1].id)
-        element.replaceChild(images[4], document.getElementsByTagName('img')[4])
-        img1 = images[4]
+        index1 = 4
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 4)
-        console.log('Replace: ' + document.getElementsByTagName('img')[4].id + ' by: ' + images[4].id)
-        element.replaceChild(images[4], document.getElementsByTagName('img')[4])
+        index2 = 4
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 1 && 1:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 5)
-        console.log('Replace: ' + document.getElementsByTagName('img')[5].id + ' by: ' + images[5].id)
-        element.replaceChild(images[5], document.getElementsByTagName('img')[5])
-        img1 = images[5]
+        index1 = 5
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 5)
-        console.log('Replace: ' + document.getElementsByTagName('img')[5].id + ' by: ' + images[5].id)
-        element.replaceChild(images[5], document.getElementsByTagName('img')[5])
+        index2 = 5
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 1 && 2:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 6)
-        console.log('Replace: ' + document.getElementsByTagName('img')[6].id + ' by: ' + images[6].id)
-        element.replaceChild(images[6], document.getElementsByTagName('img')[6])
-        img1 = images[6]
+        index1 = 6
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 6)
-        console.log('Replace: ' + document.getElementsByTagName('img')[6].id + ' by: ' + images[6].id)
-        element.replaceChild(images[6], document.getElementsByTagName('img')[6])
+        index2 = 6
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 1 && 3:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 7)
-        console.log('Replace: ' + document.getElementsByTagName('img')[7].id + ' by: ' + images[7].id)
-        element.replaceChild(images[7], document.getElementsByTagName('img')[7])
-        img1 = images[7]
+        index1 = 7
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 7)
-        console.log('Replace: ' + document.getElementsByTagName('img')[7].id + ' by: ' + images[7].id)
-        element.replaceChild(images[7], document.getElementsByTagName('img')[7])
+        index2 = 7
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 2 && 0:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 8)
-        console.log('Replace: ' + document.getElementsByTagName('img')[8].id + ' by: ' + images[8].id)
-        element.replaceChild(images[8], document.getElementsByTagName('img')[8])
-        img1 = images[89]
+        index1 = 8
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 8)
-        console.log('Replace: ' + document.getElementsByTagName('img')[8].id + ' by: ' + images[8].id)
-        element.replaceChild(images[8], document.getElementsByTagName('img')[8])
+        index2 = 8
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 2 && 1:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 9)
-        console.log('Replace: ' + document.getElementsByTagName('img')[9].id + ' by: ' + images[9].id)
-        element.replaceChild(images[9], document.getElementsByTagName('img')[9])
-        img1 = images[9]
+        index1 = 9
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 9)
-        element.replaceChild(images[9], document.getElementsByTagName('img')[9])
-        console.log('Replace: ' + document.getElementsByTagName('img')[9].id + ' by: ' + images[9].id)
+        index2 = 9
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
         img1 = ''
         break
       }
     case 2 && 2:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 10)
-        console.log('Replace: ' + document.getElementsByTagName('img')[10].id + ' by: ' + images[10].id)
-        element.replaceChild(images[10], document.getElementsByTagName('img')[10])
-        img1 = images[10]
+        index1 = 10
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 10)
-        console.log('Replace: ' + document.getElementsByTagName('img')[10].id + ' by: ' + images[10].id)
-        element.replaceChild(images[10], document.getElementsByTagName('img')[10])
+        index2 = 10
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
     case 2 && 3:
       if (img1 == '') {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 11)
-        console.log('Replace: ' + document.getElementsByTagName('img')[11].id + ' by: ' + images[11].id)
-        element.replaceChild(images[11], document.getElementsByTagName('img')[11])
-        img1 = images[11]
+        index1 = 11
+        console.log('Replace: ' + document.getElementsByTagName('img')[index1].id + ' by: ' + images[index1].id)
+        element.replaceChild(images[index1], document.getElementsByTagName('img')[index1])
+        img1 = images[index1]
         break
       } else {
-        console.log('Row = ' + row + ' column = ' + col + ' Flip index = ' + 11)
-        console.log('Replace: ' + document.getElementsByTagName('img')[11].id + ' by: ' + images[11].id)
-        element.replaceChild(images[11], document.getElementsByTagName('img')(11))
+        index2 = 11
+        console.log('Replace: ' + document.getElementsByTagName('img')[index2].id + ' by: ' + images[index2].id)
+        element.replaceChild(images[index2], document.getElementsByTagName('img')[index2])
         img1 = ''
         break
       }
@@ -245,15 +254,15 @@ function flipImage(row, col){//accept row and column where the  click is happeni
     default:
       alert('It aint HAPPENING.')
       break
-  }
-}
-// **************************************************************************************************************
+  } 
 
 // EXECUTION=====================================================================================================
 var element = document.createElement('div')
 element.setAttribute('id', "TheeGameSpace")
 element.innerHTML = createGameSpace()
 document.body.appendChild(element)
+var select = document.querySelector('#TheeGameSpace')
+select.addEventListener('click', flipImage, false)
 // **************************************************************************************************************
 console.log('TEST')
 console.log(document.getElementsByTagName('img'))
