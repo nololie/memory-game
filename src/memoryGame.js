@@ -1,7 +1,8 @@
 // GLOBAL VARIABLES==============================================================================================
 var id1 = 0
 var moves = 0
-Coverimage = 0
+var image1 = ''
+var Coverimage = 0
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
@@ -10,6 +11,15 @@ var images = new Array(12)
 
 
 // FUNCTIONS=====================================================================================================
+// if(document.readyState === 'loading'){
+//   document.addEventListener('DOMContentLoaded', ready)
+// }else{
+//   ready()
+// }
+
+// function ready(){
+
+// }
 // storing game Objects in an Array
 function storeGameObjects(array){
   var imageName = 0
@@ -32,7 +42,7 @@ function shaffle(array){
 function createGameSpace(){
   shaffle(images)
   var id = -1
-  world = '<h1> Memory Game: The Gossiper (Celebrity couples)</h1>'
+  world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
   
   // Loop to create and display the initial game space.
   for (var i = 0; i < 3; i++){   
@@ -56,26 +66,29 @@ function restart(){
 // flipping the images
 function flipImage(e){
   ++moves
-  if(e.target !== e.currentTarget){
-    var clickOn = e.target.id;
-    element.replaceChild(images[clickOn], document.getElementById(clickOn))
-    // console.log('Replaced: ' + document.getElementById(clickOn).outerHTML + ' by: ' + images[clickOn].outerHTML)
+  if ((e.target.id !== 'TheeGameSpace') && (e.target.id !== 'restartGame') && (e.target.id !== 'tittle')){
+    if ((e.target !== e.currentTarget)){
+      console.log(e.target.id)
+      var clickOn = e.target.id;
+      setTimeout(()=>{
+        element.replaceChild(images[clickOn], document.getElementById(clickOn))
+      }, 100)
+    }
+    Match(clickOn, document.getElementById(clickOn))
+    e.stopPropagtion
   }
-  e.stopPropagtion
-
-  Match(clickOn, document.getElementById(clickOn))
 }
 // Find match
 function Match(click_On, cover){ 
-  // alert(moves + ' moves.')
   if((moves % 2) == 0){
-    console.log('fliped image2: ' + images[click_On].id.charAt(3) + ' fliped imaage1: ' + id1)
-    if(images[click_On].id.charAt(3) !== id1){
-      element.replaceChild(document.getElementById(click_On), Coverimage)
-      element.replaceChild(document.getElementById(images[click_On].id), cover)
-    }
+    if(images[click_On].id.charAt(3) !== image1.charAt(3)){
+      setTimeout(() => {
+        element.replaceChild(Coverimage, document.getElementById(image1))
+        element.replaceChild(cover, document.getElementById(images[click_On].id))
+      }, 750)  
+    }   
   }else{
-    id1 = images[click_On].id.charAt(3)
+    image1 = images[click_On].id
     Coverimage = cover
   }
 }
