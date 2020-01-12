@@ -168,7 +168,6 @@ function flipImage(row, col){//accept row and column where the  click is happeni
       console.log('Inddex2 = ' + index2)
       img2 = document.getElementsByTagName('img')[col + 8]
 
-
       // find out if img1 & img2 match
       if (img2.id.charAt(3) !== img1.id.charAt(3)){
         console.log('image1 #NUM = ' + img1.id.charAt(3))
