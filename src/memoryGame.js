@@ -1,8 +1,9 @@
 // GLOBAL VARIABLES==============================================================================================
 var id1 = 0
-var moves = 0
+var flips = 0
+var matches = 0
 var image1 = ''
-var Coverimage = 0
+var Coverimage11 = 0
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
@@ -11,15 +12,6 @@ var images = new Array(12)
 
 
 // FUNCTIONS=====================================================================================================
-// if(document.readyState === 'loading'){
-//   document.addEventListener('DOMContentLoaded', ready)
-// }else{
-//   ready()
-// }
-
-// function ready(){
-
-// }
 // storing game Objects in an Array
 function storeGameObjects(array){
   var imageName = 0
@@ -27,7 +19,7 @@ function storeGameObjects(array){
   for(var i = 1; i <= 6; i++){
     for(var j = 1; j <=2; j++){
       var gameElements = document.createElement('img')
-      gameElements.setAttribute('id', "img" + i + '-' + j)
+      gameElements.setAttribute('id', + i + '-' + j)
       gameElements.setAttribute('src', "Media/" + (++imageName) + ".png")
       array[imageName] = gameElements
     }
@@ -47,7 +39,7 @@ function createGameSpace(){
   // Loop to create and display the initial game space.
   for (var i = 0; i < 3; i++){   
     for (var j = 0; j < 4; j++) { 
-      world += '<img id="' + (++id) + '" src="Media/13.png"></img>' 
+      world += '<img id="' + (++id) + '" src="Media/13.png"></img>'
     }
     world += '<br>'
   }
@@ -60,36 +52,49 @@ function createGameSpace(){
 // Restart button code
 function restart(){
   img1 = ''
-  moves = 0
+  flips = 0
+  matches = 0
   element.innerHTML = createGameSpace(myGameSpace)
 }
 // flipping the images
 function flipImage(e){
-  ++moves
-  if ((e.target.id !== 'TheeGameSpace') && (e.target.id !== 'restartGame') && (e.target.id !== 'tittle')){
-    if ((e.target !== e.currentTarget)){
-      console.log(e.target.id)
-      var clickOn = e.target.id;
-      setTimeout(()=>{
-        element.replaceChild(images[clickOn], document.getElementById(clickOn))
-      }, 100)
-    }
+  if ((e.target.id !== 'TheeGameSpace') && (e.target.id !== 'restartGame') && (e.target.id !== 'tittle') && (e.target.id.length <= 2)){
+    var clickOn = e.target.id;
+    
+    setTimeout(()=>{
+      element.replaceChild(images[clickOn], document.getElementById(clickOn))
+    }, 100)
+    
+    ++flips
+
     Match(clickOn, document.getElementById(clickOn))
+
+    setTimeout(()=>{
+      victory(matches)
+    }, 200)
+
     e.stopPropagtion
   }
 }
 // Find match
 function Match(click_On, cover){ 
-  if((moves % 2) == 0){
-    if(images[click_On].id.charAt(3) !== image1.charAt(3)){
+  if((flips % 2) == 0){
+    if(images[click_On].id.charAt(0) !== image1.charAt(0)){
       setTimeout(() => {
-        element.replaceChild(Coverimage, document.getElementById(image1))
+        element.replaceChild(Coverimage1, document.getElementById(image1))
         element.replaceChild(cover, document.getElementById(images[click_On].id))
       }, 750)  
-    }   
+    }else{
+      matches++
+    }  
   }else{
     image1 = images[click_On].id
-    Coverimage = cover
+    Coverimage1 = cover
+  }
+}
+function victory(matchedCards){
+  if (matchedCards === 6){
+    alert('You WIN!!!!!!')
   }
 }
 // **************************************************************************************************************
@@ -103,5 +108,3 @@ document.body.appendChild(element)
 var select = document.querySelector('#TheeGameSpace')
 select.addEventListener('click', flipImage, false)
 // **************************************************************************************************************
-// console.log('TEST')
-// console.log(document.getElementsByTagName('img'))
