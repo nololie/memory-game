@@ -3,6 +3,8 @@ var flips = 0
 var matches = 0
 var image1 = ''
 var Coverimage11 = 0
+var gameOn = false
+var timeRemaining = 5
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
@@ -33,8 +35,15 @@ function shaffle(array) {
 function createGameSpace() {
   shaffle(images)
   var id = -1
-  world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
 
+  world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
+  world += '<div id="gameInfo">'
+  world += '<p id="heading">Game Information.</p>'
+  world += '<p id="Matches">Matches made: 0</p>'
+  world += `<p id="timeRemaining">Time remaining: ${timeRemaining} second(s)</p>`
+  world += '</div>'
+  
+  world += '<div id="activeWorld">'
   // Loop to create and display the initial game space.
   for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 4; j++) {
@@ -42,10 +51,8 @@ function createGameSpace() {
     }
     world += '<br>'
   }
-
-  world += "</div>"
   world += '<button id="restartGame" onClick="restart()">Restart</button>'
-
+  world += '</div>'
   return world;
 }
 // Restart button code
@@ -57,11 +64,17 @@ function restart() {
 }
 // flipping the images
 function flipImage(e) {
-  if ((e.target.id !== 'TheeGameSpace') && (e.target.id !== 'restartGame') && (e.target.id !== 'tittle') && (e.target.id.length <= 2)) {
+  if(gameOn == false) {
+    timer()
+    gameOn = true
+  }
+  select.removeEventListener('click', flipImage)
+  if ((e.target.id.length <= 2)) {
     var clickOn = e.target.id;
 
     setTimeout(() => {
-      element.replaceChild(images[clickOn], document.getElementById(clickOn))
+      element.lastChild.replaceChild(images[clickOn], document.getElementById(clickOn))
+      e.stopPropagtion
     }, 100)
 
     ++flips
@@ -69,31 +82,50 @@ function flipImage(e) {
     Match(clickOn, document.getElementById(clickOn))
 
     setTimeout(() => {
-      victory(matches)
-    }, 200)
-
-    e.stopPropagtion
+      victory()
+    }, 500)
   }
 }
 // Find match
 function Match(click_On, cover) {
-  if ((flips % 2) == 0) {
+  if (((flips % 2) == 0) && (images[click_On].id !== image1)) {
     if (images[click_On].id.charAt(0) !== image1.charAt(0)) {
       setTimeout(() => {
-        element.replaceChild(Coverimage1, document.getElementById(image1))
-        element.replaceChild(cover, document.getElementById(images[click_On].id))
-      }, 750)
+        element.lastChild.replaceChild(Coverimage1, document.getElementById(image1))
+        element.lastChild.replaceChild(cover, document.getElementById(images[click_On].id))
+      }, 500)
     } else {
       matches++
+      document.getElementById('Matches').innerHTML = matches
     }
   } else {
     image1 = images[click_On].id
     Coverimage1 = cover
   }
+  select.addEventListener('click', flipImage)
 }
-function victory(matchedCards) {
-  if (matchedCards === 6) {
+function victory() {
+  if (matches === 6) {
     alert('You WIN!!!!!!')
+  }
+}
+function timer(){
+  var clear = setInterval(decrementSeconds, 1000);
+  console.log(document.getElementById('timeRemaining').innerHTML)
+  function decrementSeconds() {
+    --timeRemaining
+    document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
+    setTimeout(() => {
+      if(timeRemaining == 0) {
+      window.clearInterval(clear)
+      gameOver()
+    };
+    }, 500)
+  }
+}
+function gameOver(){
+  if(timeRemaining == 0) {
+    alert('Gameover!!!\nTime up.')
   }
 }
 // **************************************************************************************************************
@@ -101,9 +133,10 @@ function victory(matchedCards) {
 
 // EXECUTION=====================================================================================================
 var element = document.createElement('div')
-element.setAttribute('id', "TheeGameSpace")
 element.innerHTML = createGameSpace()
 document.body.appendChild(element)
+element.setAttribute('id', "TheeGameSpace")
+
 var select = document.querySelector('#TheeGameSpace')
 select.addEventListener('click', flipImage, false)
 // **************************************************************************************************************

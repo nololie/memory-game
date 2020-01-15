@@ -2,11 +2,11 @@ img{
     align-self: center;
     justify-self: center;      /*this code just dont work*/
     margin: 1rem;
-    height: 10rem;
-    width: 10rem;
+    height: 13rem;
+    width: 13rem;
 }
 
-h1, h3{
+p, h1{
     color: white;
     text-align: center;
     padding-top: 5px;
@@ -21,6 +21,21 @@ h1, h3{
     width: fit-content;
     background-color: black;
 }
+
+#gameInfo{
+    grid-template-columns: auto auto;
+    font-size: 25px;
+    display: grid;
+}
+
+#heading{
+    grid-area: 1 / 1/ span 1/ span 2;
+}
+
+#timeRemaining{
+    grid-area: 2 / 1 / span 1/ span 1;
+}
+
 
 body{
     margin-top: 0;
