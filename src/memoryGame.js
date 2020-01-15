@@ -4,7 +4,7 @@ var matches = 0
 var image1 = ''
 var Coverimage11 = 0
 var gameOn = false
-var timeRemaining = 5
+var timeRemaining = 100
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
