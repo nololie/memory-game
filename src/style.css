@@ -19,7 +19,7 @@ p, h1{
     margin-right: auto;
     margin-top: 0px;
     width: fit-content;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.432);
 }
 
 #gameInfo{
@@ -39,17 +39,15 @@ p, h1{
 
 body{
     margin-top: 0;
-
-    align-items: center;
-    justify-items: center;       /*this code just dont work*/
-
-    background: yellowgreen;
+    background: rgba(80, 202, 161, 0.699);
 }
 
 #restartGame{
+    font-size: 1.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     width: 40%;
+    height: 5%;
     margin-left: 30%;
     margin-right: 30%;
 }

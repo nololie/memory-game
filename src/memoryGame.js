@@ -4,7 +4,7 @@ var matches = 0
 var image1 = ''
 var Coverimage11 = 0
 var gameOn = false
-var timeRemaining = 100
+var timeRemaining = 60
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
@@ -35,6 +35,7 @@ function shaffle(array) {
 function createGameSpace() {
   shaffle(images)
   var id = -1
+  gameOn = true
 
   world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
   world += '<div id="gameInfo">'
@@ -57,19 +58,23 @@ function createGameSpace() {
 }
 // Restart button code
 function restart() {
+  timeRemaining = 60
   img1 = ''
   flips = 0
   matches = 0
+  gameOn = true
   element.innerHTML = createGameSpace(myGameSpace)
+  select.addEventListener('click', flipImage, false)
 }
 // flipping the images
 function flipImage(e) {
-  if(gameOn == false) {
-    timer()
-    gameOn = true
-  }
-  select.removeEventListener('click', flipImage)
-  if ((e.target.id.length <= 2)) {
+  if((e.target.id.length <= 2) && (gameOn)){
+    select.removeEventListener('click', flipImage)
+    
+    if(flips < 1){
+      timer()
+    }
+
     var clickOn = e.target.id;
 
     setTimeout(() => {
@@ -96,7 +101,7 @@ function Match(click_On, cover) {
       }, 500)
     } else {
       matches++
-      document.getElementById('Matches').innerHTML = matches
+      document.getElementById('Matches').innerHTML = 'Matches made: ' + matches
     }
   } else {
     image1 = images[click_On].id
@@ -107,24 +112,26 @@ function Match(click_On, cover) {
 function victory() {
   if (matches === 6) {
     alert('You WIN!!!!!!')
+    gameOn = false
   }
 }
 function timer(){
   var clear = setInterval(decrementSeconds, 1000);
-  console.log(document.getElementById('timeRemaining').innerHTML)
   function decrementSeconds() {
-    --timeRemaining
-    document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
-    setTimeout(() => {
-      if(timeRemaining == 0) {
+    if(gameOn && (timeRemaining > 0)){
+      --timeRemaining
+      document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
+    }else{
       window.clearInterval(clear)
-      gameOver()
-    };
-    }, 500)
+      setTimeout(() => {
+        gameOver()
+      }, 500)
+    }
   }
 }
 function gameOver(){
   if(timeRemaining == 0) {
+    select.removeEventListener('click', flipImage)
     alert('Gameover!!!\nTime up.')
   }
 }
