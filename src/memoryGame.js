@@ -52,8 +52,8 @@ function createGameSpace() {
     }
     world += '<br>'
   }
-  world += '<button id="restartGame" onClick="restart()">Restart</button>'
   world += '</div>'
+  world += '<button id="restartGame" onClick="restart()">Restart</button>'
   return world;
 }
 // Restart button code
@@ -62,7 +62,7 @@ function restart() {
   img1 = ''
   flips = 0
   matches = 0
-  gameOn = true
+  gameOn = false
   element.innerHTML = createGameSpace(myGameSpace)
   select.addEventListener('click', flipImage, false)
 }
@@ -78,12 +78,12 @@ function flipImage(e) {
     var clickOn = e.target.id;
 
     setTimeout(() => {
-      element.lastChild.replaceChild(images[clickOn], document.getElementById(clickOn))
+      element.lastChild.previousSibling.replaceChild(images[clickOn], document.getElementById(clickOn))
       e.stopPropagtion
     }, 100)
-
+    
     ++flips
-
+    
     Match(clickOn, document.getElementById(clickOn))
 
     setTimeout(() => {
@@ -96,8 +96,8 @@ function Match(click_On, cover) {
   if (((flips % 2) == 0) && (images[click_On].id !== image1)) {
     if (images[click_On].id.charAt(0) !== image1.charAt(0)) {
       setTimeout(() => {
-        element.lastChild.replaceChild(Coverimage1, document.getElementById(image1))
-        element.lastChild.replaceChild(cover, document.getElementById(images[click_On].id))
+        element.lastChild.previousSibling.replaceChild(Coverimage1, document.getElementById(image1))
+        element.lastChild.previousSibling.replaceChild(cover, document.getElementById(images[click_On].id))
       }, 500)
     } else {
       matches++
