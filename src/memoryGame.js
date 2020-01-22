@@ -3,8 +3,7 @@ var flips = 0
 var matches = 0
 var image1 = ''
 var Coverimage11 = 0
-var gameOn = false
-var timeRemaining = 60
+var timeRemaining = 50
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
@@ -35,7 +34,6 @@ function shaffle(array) {
 function createGameSpace() {
   shaffle(images)
   var id = -1
-  gameOn = true
 
   world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
   world += '<div id="gameInfo">'
@@ -58,18 +56,16 @@ function createGameSpace() {
 }
 // Restart button code
 function restart() {
-  timeRemaining = 60
+  timeRemaining = 50
   img1 = ''
   flips = 0
   matches = 0
-  gameOn = false
   element.innerHTML = createGameSpace(myGameSpace)
   select.addEventListener('click', flipImage, false)
 }
 // flipping the images
 function flipImage(e) {
-  if((e.target.id.length <= 2) && (gameOn)){
-    select.removeEventListener('click', flipImage)
+  if((e.target.id.length <= 2)){
     
     if(flips < 1){
       timer()
@@ -81,7 +77,7 @@ function flipImage(e) {
       element.lastChild.previousSibling.replaceChild(images[clickOn], document.getElementById(clickOn))
       e.stopPropagtion
     }, 100)
-    
+  
     ++flips
     
     Match(clickOn, document.getElementById(clickOn))
@@ -93,34 +89,39 @@ function flipImage(e) {
 }
 // Find match
 function Match(click_On, cover) {
+  select.removeEventListener('click', flipImage)
+
   if (((flips % 2) == 0) && (images[click_On].id !== image1)) {
     if (images[click_On].id.charAt(0) !== image1.charAt(0)) {
       setTimeout(() => {
         element.lastChild.previousSibling.replaceChild(Coverimage1, document.getElementById(image1))
         element.lastChild.previousSibling.replaceChild(cover, document.getElementById(images[click_On].id))
+        select.addEventListener('click', flipImage)
       }, 500)
     } else {
       matches++
       document.getElementById('Matches').innerHTML = 'Matches made: ' + matches
+      select.addEventListener('click', flipImage)
     }
   } else {
+    select.addEventListener('click', flipImage)
     image1 = images[click_On].id
     Coverimage1 = cover
   }
-  select.addEventListener('click', flipImage)
 }
 function victory() {
   if (matches === 6) {
     alert('You WIN!!!!!!')
-    gameOn = false
   }
 }
 function timer(){
   var clear = setInterval(decrementSeconds, 1000);
   function decrementSeconds() {
-    if(gameOn && (timeRemaining > 0)){
+    if((timeRemaining > 0) && (matches !== 6)){
       --timeRemaining
       document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
+    }else if((flips = 0)){
+      window.clearInterval(clear)
     }else{
       window.clearInterval(clear)
       setTimeout(() => {
@@ -130,7 +131,7 @@ function timer(){
   }
 }
 function gameOver(){
-  if(timeRemaining == 0) {
+  if((timeRemaining == 0) && (matches !== 6)) {
     select.removeEventListener('click', flipImage)
     alert('Gameover!!!\nTime up.')
   }
