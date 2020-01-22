@@ -1,4 +1,4 @@
-// GLOBAL VARIABLES==============================================================================================
+// GLOBAL VARIABLES===========================================================================================
 var flips = 0
 var matches = 0
 var image1 = ''
@@ -8,10 +8,10 @@ var timeRemaining = 50
 var myGameSpace = new Array(3)
 // creating an array to store htmlelements
 var images = new Array(12)
-// **************************************************************************************************************
+// ***********************************************************************************************************
 
 
-// FUNCTIONS=====================================================================================================
+// FUNCTIONS==================================================================================================
 // storing game Objects in an Array
 function storeGameObjects(array) {
   var imageName = 0
@@ -111,7 +111,7 @@ function Match(click_On, cover) {
 }
 function victory() {
   if (matches === 6) {
-    alert('You WIN!!!!!!')
+    alert(`You completed the game in ${timeRemaining} seconds and ${flips} moves.\nWell done! YOU WIN!`)
   }
 }
 function timer(){
@@ -120,7 +120,7 @@ function timer(){
     if((timeRemaining > 0) && (matches !== 6)){
       --timeRemaining
       document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
-    }else if((flips = 0)){
+    }else if((flips == 0)){
       window.clearInterval(clear)
     }else{
       window.clearInterval(clear)
@@ -133,13 +133,13 @@ function timer(){
 function gameOver(){
   if((timeRemaining == 0) && (matches !== 6)) {
     select.removeEventListener('click', flipImage)
-    alert('Gameover!!!\nTime up.')
+    alert('Time up. You lost!\nGameover!')
   }
 }
-// **************************************************************************************************************
+// ***********************************************************************************************************
 
 
-// EXECUTION=====================================================================================================
+// EXECUTION==================================================================================================
 var element = document.createElement('div')
 element.innerHTML = createGameSpace()
 document.body.appendChild(element)
@@ -147,4 +147,4 @@ element.setAttribute('id', "TheeGameSpace")
 
 var select = document.querySelector('#TheeGameSpace')
 select.addEventListener('click', flipImage, false)
-// **************************************************************************************************************
+// ***********************************************************************************************************
