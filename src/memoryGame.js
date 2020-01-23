@@ -110,16 +110,16 @@ function Match(click_On, cover) {
 }
 function victory() {
   if (matches === 6) {
-    alert(`You completed the game in ${timeRemaining} seconds and ${flips} moves.\nWell done! YOU WIN!`)
+    alert(`You completed the game in ${50 - timeRemaining} seconds and ${flips} moves.\nWell done! YOU WIN!`)
   }
 }
 function timer(){
   var clear = setInterval(decrementSeconds, 1000);
   function decrementSeconds() {
-    if((timeRemaining > 0) && (matches !== 6)){
+    if((timeRemaining > 0) && (matches !== 6) && (flips !== 0)){
       --timeRemaining
       document.getElementById('timeRemaining').innerHTML = `Time remaining: ${timeRemaining} second(s)`
-    }else if((flips == 0)){
+    }else if(flips === 0){
       window.clearInterval(clear)
     }else{
       window.clearInterval(clear)
