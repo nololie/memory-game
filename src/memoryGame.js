@@ -2,7 +2,6 @@
 var flips = 0
 var matches = 0
 var image1 = ''
-var Coverimage11 = 0
 var timeRemaining = 50
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3)
@@ -140,11 +139,16 @@ function gameOver(){
 
 
 // EXECUTION==================================================================================================
-var element = document.createElement('div')
-element.innerHTML = createGameSpace()
-document.body.appendChild(element)
-element.setAttribute('id', "TheeGameSpace")
+// var element = document.createElement('div')
+// element.innerHTML = createGameSpace()
+// document.body.appendChild(element)
+// element.setAttribute('id', "TheeGameSpace")
 
-var select = document.querySelector('#TheeGameSpace')
-select.addEventListener('click', flipImage, false)
+// var select = document.querySelector('#TheeGameSpace')
+// select.addEventListener('click', flipImage, false)
 // ***********************************************************************************************************
+
+// Exporting functions
+module.exports = {
+  flipImage, createGameSpace
+}
