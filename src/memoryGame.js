@@ -12,26 +12,25 @@ var images = new Array(12)
 
 // FUNCTIONS==================================================================================================
 // storing game Objects in an Array
-function storeGameObjects(array) {
+function storeGameObjects() {
   var imageName = 0
-
-  for (var i = 1; i <= 6; i++) {
-    for (var j = 1; j <= 2; j++) {
+  images = []
+  for (var i = 0; i < 6; i++) {
+    for (var j = 0; j < 2; j++) {
       var gameElements = document.createElement('img')
       gameElements.setAttribute('id', + i + '-' + j)
       gameElements.setAttribute('src', "Media/" + (++imageName) + ".png")
-      array[imageName] = gameElements
+      images[imageName] = gameElements
     }
   }
 }
 // shuffling images
 function shaffle(array) {
-  storeGameObjects(array)
   array.sort(function (a, b) { return 0.5 - Math.random() })
 }
 // Creating gameSpace
 function createGameSpace() {
-  shaffle(images)
+  storeGameObjects()
   var id = -1
 
   world = '<h1 id="tittle"> Memory Game: The Gossiper (Celebrity couples)</h1>'
@@ -67,6 +66,7 @@ function flipImage(e) {
   if((e.target.id.length <= 2)){
     
     if(flips < 1){
+      shaffle(images)
       timer()
     }
 
