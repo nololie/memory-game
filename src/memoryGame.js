@@ -194,7 +194,7 @@ function gameOver(){
 // ***********************************************************************************************************
 
 
-Exporting functions
+// Exporting functions
 module.exports = {
   flipImage, createGameSpace
 }
