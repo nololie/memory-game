@@ -2,6 +2,7 @@
 var flips = 0
 var matches = 0
 var image1 = ''
+var modeTime = 50
 var timeRemaining = 50
 var gameMode = 'Hard'
 var modeLength = 4
@@ -21,7 +22,6 @@ var images = new Array(12)
 
 
 // FUNCTIONS==================================================================================================
-
 // predefign board
 function setUpGame(){
   var setup = document.createElement('div')
@@ -39,6 +39,7 @@ function setUpGame(){
 function setGameMode(mode){
   if(mode === 'Beginer'){
     gameMode = 'Beginer'
+    modeTime = 30
     timeRemaining = 30
     modeLength = 4
     modeHight = 1
@@ -46,6 +47,7 @@ function setGameMode(mode){
     element.innerHTML = createGameSpace()
   }else if(mode === 'Regular'){
     gameMode = 'Regular'
+    modeTime = 40
     timeRemaining = 40
     modeLength = 3
     modeHight = 2
@@ -110,7 +112,6 @@ function restart() {
   flips = 0
   matches = 0
   setGameMode(gameMode)
-  document.getElementById('timeRemaining').innerHTML = `Time left: ${timeRemaining} second(s)`
   select.addEventListener('click', flipImage, false)
 }
 // flipping the images
@@ -124,9 +125,7 @@ function flipImage(e) {
     var clickOn = e.target.id;
     
     setTimeout(() => {
-      console.log(`Replacing at ${document.getElementById(clickOn).parentElement.outerHTML}`)
-      console.log(`Should replace at ${element.lastChild.previousSibling.outerHTML}`)
-      element.lastChild.previousSibling.replaceChild(images[clickOn], document.getElementById(clickOn))
+      document.getElementById('activeWorld').replaceChild(images[clickOn], document.getElementById(clickOn)) 
       e.stopPropagtion
     }, 100)
     
@@ -143,11 +142,11 @@ function flipImage(e) {
 function Match(click_On, cover) {
   select.removeEventListener('click', flipImage)
   
-  if (((flips % 2) == 0) && (images[click_On].id !== image1)) {
+  if (((flips % 2) == 0)) {
     if (images[click_On].id !== image1) {
       setTimeout(() => {
-        element.lastChild.previousSibling.replaceChild(Coverimage1, document.getElementById(image1))
-        element.lastChild.previousSibling.replaceChild(cover, document.getElementById(images[click_On].id))
+        document.getElementById('activeWorld').replaceChild(Coverimage1, document.getElementById(image1))
+        document.getElementById('activeWorld').replaceChild(cover, document.getElementById(images[click_On].id))
         select.addEventListener('click', flipImage)
       }, 500)
     } else {
@@ -164,7 +163,7 @@ function Match(click_On, cover) {
 // functionality for a win
 function victory() {
   if (matches === needToMatch) {
-    alert(`You completed the game in ${50 - timeRemaining} seconds and ${flips} moves.\nWell done! YOU WIN!`)
+    alert(`You completed the game in ${modeTime - timeRemaining} seconds and ${flips} moves.\nWell done! YOU WIN!`)
   }
 }
 // functionality for a game tamer
