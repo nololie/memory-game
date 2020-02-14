@@ -105,7 +105,7 @@ function storeGameObjects() {
     for (var j = 0; j < 2; j++) {
       var gameElements = document.createElement('img');
       gameElements.setAttribute('id', 'couple' + i);
-      gameElements.setAttribute('src', "Media/" + (++imageName) + ".png");
+      gameElements.setAttribute('src', "./src/Media/" + (++imageName) + ".png");
       images[imageName] = gameElements;
     }
   }
@@ -133,7 +133,7 @@ function createGameSpace() {
   
   for (var i = 0; i < modeHight; i++) { // columns
     for (var j = 0; j < modeLength; j++) { // rows
-      world += '<img id="' + (++id) + '" src="Media/13.png"></img>';
+      world += '<img id="' + (++id) + '" src="./src/Media/13.png"></img>';
     }
     world += '<br>';
   }
