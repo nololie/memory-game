@@ -15,15 +15,15 @@ let {
 var jsdom = require("jsdom");
 fs = require("fs");
 
+beforeEach(function() {
+    // make a fake DOM to interact with
+    const dom = new jsdom.JSDOM(fs.readFileSync('memoryGame.html'));
+    global.document = dom.window.document;
+    global.window = dom.window;
+    global.navigator = dom.window.navigator;
+});
 
 describe("setUpGame", function() {
-    beforeEach(function() {
-        // make a fake DOM to interact with
-        const dom = new jsdom.JSDOM(fs.readFileSync('memoryGame.html'));
-        global.document = dom.window.document;
-        global.window = dom.window;
-        global.navigator = dom.window.navigator;
-    });
 
     it("updates dom with a game enviroment/space/GUI.", () => {
         // before function call we expect our html body to be the comment on the HTML body
@@ -58,15 +58,8 @@ describe("setUpGame", function() {
 });
 
 describe("flip", () => {
-    beforeEach(function() {
-        // make a fake DOM to interact with
-        const dom = new jsdom.JSDOM(fs.readFileSync("memoryGame.html"));
-        global.document = dom.window.document;
-        global.window = dom.window;
-        global.navigator = dom.window.navigator;
-    });
 
     it("should flip the cards", () => {
         let card = global.document.getElementsByClassName("")
     })
-})
+});
