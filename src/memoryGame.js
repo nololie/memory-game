@@ -11,7 +11,7 @@ var needToMatch = 6;
 var playerName = 'Player';
 
 // EXECUTION==================================================================================================
-setUpGame();
+// setUpGame();
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3);
 // creating an array to store htmlelements
@@ -24,47 +24,37 @@ var images = new Array(12);
 function setUpGame() {
     var setup = document.createElement('div')
     setup.setAttribute("id", "selectMode")
-    setup.innerHTML = `<h1>Memory game: The Gossiper</h1>
-                        <h2>Select game mode</h2>
+    setup.innerHTML = `
+    <h1>Memory game: The Gossiper</h1>
+    <h2>Select game mode</h2>
 
-                        <div id="Select">
-                          <button class="gameMode" id="Beginer" onClick="setGameMode('Beginer')" disabled>Beginer</button>
-                          <button class="gameMode" id="Regular" onClick="setGameMode('Regular')" disabled>Regular</button>
-                          <button class="gameMode" id="Hard" onClick="setGameMode('Hard')" disabled>Hard</button>
-                        </div>
-                        
-                        <br>
-                        
-                        <div id="Overlay"> 
-                          <form autocomplete="on">
+    <div id="Select">
+        <button id="Beginer" onclick="setGameMode('Beginer')" disabled="">Beginer</button>
+        <button id="Regular" onclick="setGameMode('Regular')" disabled="">Regular</button>
+        <button id="Hard" onclick="setGameMode('Hard')" disabled="">Hard</button>
+    </div>
 
-                            Enter your name:
-                            <input 
-                            id="playerName"
-                            placeholder="Nolo"
-                            autofocus
-                            dirname="playerName.dir">
-                            </input>
-                            <input
-                            onClick="moveOn()"
-                            type="button"
-                            value="Done"></input>
+    <br>
 
-                          </form>
-
-                          
-                        </div>
-                     </div>`;
+    <div id="Overlay"> 
+        <form autocomplete="on">
+        <label for="Name prompt">Enter your name:</label>
+        <input id="playerName" placeholder="Nolo" autofocus="" dirname="playerName.dir">
+        
+        <input onclick="moveOn()" type="button" value="Done">
+        </form>
+    </div>`;
 
     document.body.append(setup);
-
 }
 
 function moveOn() {
-    playerName = document.getElementById("playerName").value;
-    console.log(playerName);
+    if (document.getElementById("playerName").value !== '') {
+        playerName = document.getElementById("playerName").value;
+    }
+
     document.getElementById("Overlay").style.display = "none";
-    document.getElementById("Beginer", "Regular", "Hard").disabled = false;
+    document.getElementById("Beginer").disabled = false;
     document.getElementById("Regular").disabled = false;
     document.getElementById("Hard").disabled = false;
 }
@@ -72,6 +62,7 @@ function moveOn() {
 function setGameMode(mode) {
     var element = document.createElement('div');
     element.setAttribute('id', "TheeGameSpace");
+
     if (mode === 'Beginer') {
         console.log("your name is: " + playerName);
         gameMode = 'Beginer';
@@ -93,10 +84,12 @@ function setGameMode(mode) {
         timeRemaining = 50;
         element.innerHTML = createGameSpace();
     }
+
     document.body.innerHTML = element.outerHTML;
     document.getElementById('timeRemaining').innerHTML = `Time left: ${timeRemaining} second(s)`;
     select = document.querySelector('#TheeGameSpace');
     select.addEventListener('click', flipImage, false);
+
     return mode;
 }
 // storing game Objects in an Array
@@ -205,7 +198,13 @@ function Match(click_On, cover) {
 // functionality for a win
 function victory() {
     if (matches === needToMatch) {
-        alert(`Well done ${playerName}! YOU WIN! You WON the game in ${modeTime - timeRemaining} seconds and ${flips} moves.`);
+        let overlay = document.createElement('div')
+        overlay.setAttribute('id', 'Overlay')
+        overlay.innerHTML = `YOU WIN! Well done ${playerName}! You completed the game in ${modeTime - timeRemaining} seconds and ${flips} moves.`;
+        document.body.appendChild(overlay)
+        document.getElementById("Overlay").style.display = "block";
+
+        console.log('DIV' + document.getElementById("Overlay").innerHTML)
     }
 }
 // functionality for a game tamer
@@ -230,7 +229,12 @@ function timer() {
 function gameOver() {
     if ((timeRemaining == 0) && (matches !== needToMatch)) {
         select.removeEventListener('click', flipImage);
-        alert(`Time is up ${playerName}.\nYOU LOST! Game Over!`);
+        let overlay = document.createElement('div')
+        overlay.setAttribute('id', 'Overlay')
+        overlay.innerHTML = `Time is up ${playerName}.\nYOU LOST! Game Over!`;
+        document.body.appendChild(overlay)
+        document.getElementById("Overlay").style.display = "block";
+        alert();
     }
 }
 // ***********************************************************************************************************
