@@ -11,7 +11,7 @@ var needToMatch = 6;
 var playerName = 'Player';
 
 // EXECUTION==================================================================================================
-// setUpGame();
+setUpGame();
 // Create a 2-dimensional array 
 var myGameSpace = new Array(3);
 // creating an array to store htmlelements
