@@ -22,7 +22,21 @@ var images = new Array(12);
 // FUNCTIONS==================================================================================================
 // predefign board
 function setUpGame() {
-    var setup = document.createElement('div')
+    flips = 0;
+    matches = 0;
+    image1 = '';
+    modeTime = 50;
+    timeRemaining = 50;
+    gameMode = 'Hard';
+    modeLength = 4;
+    modeHight = 3;
+    needToMatch = 6;
+    playerName = 'Player';
+    
+    var setup = ""
+    
+    document.body.innerHTML = setup
+    setup = document.createElement('div')
     setup.setAttribute("id", "selectMode")
     setup.innerHTML = `
     <h1>Memory game: The Gossiper</h1>
@@ -200,7 +214,9 @@ function victory() {
     if (matches === needToMatch) {
         let overlay = document.createElement('div')
         overlay.setAttribute('id', 'Overlay')
-        overlay.innerHTML = `YOU WIN! Well done ${playerName}! You completed the game in ${modeTime - timeRemaining} seconds and ${flips} moves.`;
+        overlay.innerHTML = `YOU WIN! Well done ${playerName}! You completed the game in ${modeTime - timeRemaining} seconds and ${flips} moves.<br>`;
+        overlay.innerHTML += '<button class="newGame" onClick="restart()">Restart</button>'
+        overlay.innerHTML += '<button class="newGame" onClick="setUpGame()">New game</button>'
         document.body.appendChild(overlay)
         document.getElementById("Overlay").style.display = "block";
 
@@ -238,7 +254,6 @@ function gameOver() {
     }
 }
 // ***********************************************************************************************************
-
 
 // Exporting functions
 module.exports = {

@@ -59,6 +59,14 @@ body {
     grid-area: 3 / 1 / span 1 / span 2;
 }
 
+.newGame {
+    font-size: 1.5rem;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: 20%;
+    grid-area: 3 / 1 / span 1 / span 2;
+}
+
 #activeWorld {
     justify-content: center;
     grid-area: 2 / 2;
